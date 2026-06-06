@@ -1,2 +1,2 @@
 #!/bin/bash
-netstat -lpa 2>/dev/null || ss -lpa
+sudo netstat -lntup 2>/dev/null || netstat -an
