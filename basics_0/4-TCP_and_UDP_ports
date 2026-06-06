@@ -1,2 +1,2 @@
 #!/bin/bash
-sudo netstat -lntup 2>/dev/null || netstat -an
+netstat -a --listening --program
