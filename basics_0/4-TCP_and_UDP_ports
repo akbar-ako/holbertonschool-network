@@ -1,2 +1,2 @@
 #!/bin/bash
-netstat -a
+sudo netstat -lpn
