@@ -1,2 +1,2 @@
 #!/bin/bash
-netstat -la --program
+netstat -lpa 2>/dev/null || ss -lpa
