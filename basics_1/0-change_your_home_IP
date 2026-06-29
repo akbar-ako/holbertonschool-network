@@ -1,24 +1,4 @@
 #!/usr/bin/env bash
-# /etc/hosts faylını boşluq və format fərqliliyinə baxmadan dəqiq yeniləyən skript
-
-# 1. Müvəqqəti fayl yaradırıq
-TMP_FILE="/tmp/hosts.tmp"
-
-# 2. Əgər sətirdə 'localhost' sözü keçirsə və o sətir 127. ilə başlayırsa, onu tamamilə 127.0.0.2 ilə əvəzləyirik.
-# Digər sətirləri isə olduğu kimi saxlayırıq.
-awk '{
-    if ($0 ~ /127\.[0-9]+\.[0-9]+\.[0-9]+/ && $0 ~ /localhost/) {
-        print "127.0.0.2 localhost"
-    } else {
-        print $0
-    }
-}' /etc/hosts > "$TMP_FILE"
-
-# 3. İkinci addım: facebook.com qeydini yoxlayırıq və yeniləyirik/əlavə edirik
-if grep -q "facebook.com" "$TMP_FILE"; then
-    # Əgər varsa, həmin sətri bütövlükdə 8.8.8.8 facebook.com edirik
-    sed -i 's/.*facebook.com.*/8.8.8.8 facebook.com/g' "$TMP_FILE"
-else
-    # Yoxdursa, faylın sonuna əlavə edirik
-    echo "8.8.8.8 facebook.com" >> "$TMP_FILE"
-fi
+# Change host of localhost and facebook.com
+echo "127.0.0.2 localhost" > /etc/hosts
+echo "8.8.8.8	facebook.com" >> /etc/hosts
